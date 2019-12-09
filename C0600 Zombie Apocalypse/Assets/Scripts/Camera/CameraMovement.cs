@@ -6,7 +6,8 @@ public class CameraMovement : MonoBehaviour
 {
     private int width;
     private int height;
-    private float speed = 20f;
+    private float speed = 5f;
+    private int boundary = 10;
     private int offset;
 
     // Start is called before the first frame update

@@ -206,5 +206,4 @@ MonoBehaviour:
   rateOfFire: 0.1
   turnSpeed: 120
   bullet: {fileID: 6124275338922891110, guid: 5774f47c91c58e84892436c6d081b357, type: 3}
-  targetMode: 0
-  turretHealth: 0
+  health: 0
