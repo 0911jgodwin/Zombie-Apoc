@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ClickEvent : MonoBehaviour
 {
+    private TurretManager turretManager;
     public Turret turret;
     public Wall wall;
 
@@ -14,23 +15,25 @@ public class ClickEvent : MonoBehaviour
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
             
-            RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero, LayerMask.GetMask("Grid"));
-            
-            if (hit.collider != null && hit.collider.gameObject.tag == "Point")
+            RaycastHit2D hitGrid = Physics2D.Raycast(mousePos2D, Vector2.zero, LayerMask.GetMask("Grid"));
+
+            if (hitGrid.collider != null && hitGrid.collider.gameObject.tag == "Point")
             {
+                Turret newTurret = 
                 Instantiate(
                     turret,
-                    GameObject.Find(hit.collider.gameObject.name).transform.position,
+                    GameObject.Find(hitGrid.collider.gameObject.name).transform.position,
                     Quaternion.identity
                 );
+                turretManager.Add(newTurret);
             }
 
-            if (hit.collider != null && hit.collider.gameObject.tag == "Wall")
+            if (hitGrid.collider != null && hitGrid.collider.gameObject.tag == "Wall")
             {
                 Instantiate(
                     wall,
-                    GameObject.Find(hit.collider.gameObject.name).transform.position,
-                    GameObject.Find(hit.collider.gameObject.name).transform.rotation
+                    GameObject.Find(hitGrid.collider.gameObject.name).transform.position,
+                    GameObject.Find(hitGrid.collider.gameObject.name).transform.rotation
                 );
             }
         }

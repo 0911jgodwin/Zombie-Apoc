@@ -32,7 +32,7 @@ public class GridSetup : MonoBehaviour
                 DestroyChildren();
                 wallsActive = false;
                 GeneratePoints();
-                pointsActive = true;                
+                pointsActive = true;
             }
             else
             {
@@ -40,7 +40,6 @@ public class GridSetup : MonoBehaviour
                 pointsActive = false;
             }
         }
-
         if (Input.GetKeyDown("l"))
         {
             if (!wallsActive)
@@ -48,7 +47,7 @@ public class GridSetup : MonoBehaviour
                 DestroyChildren();
                 pointsActive = false;
                 GenerateWalls();
-                wallsActive = true;              
+                wallsActive = true;
             }
             else
             {
@@ -56,7 +55,6 @@ public class GridSetup : MonoBehaviour
                 wallsActive = false;
             }
         }
-
     }
 
     void DestroyChildren()
