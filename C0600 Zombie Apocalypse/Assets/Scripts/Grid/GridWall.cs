@@ -4,25 +4,14 @@ using UnityEngine;
 
 public class GridWall : MonoBehaviour
 {
-    SpriteRenderer wallSprite;
-    Color defaultColor;
-    public int ID;
-    [SerializeField]
-    GameObject wall;
-
-    public int X { get; set; }
-    public int Y { get; set; }
-
-    public GridWall(int x, int y)
-    {
-        this.X = x;
-        this.Y = y;
-    }
+    private SpriteRenderer sprite;
+    private Color defaultColor;
+    private int ID;
 
     void Start()
     {
-        wallSprite = GetComponent<SpriteRenderer>();
-        defaultColor = wallSprite.color;
+        sprite = GetComponent<SpriteRenderer>();
+        defaultColor = sprite.color;
     }
 
     private void Update()
@@ -42,11 +31,11 @@ public class GridWall : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        wallSprite.color = Color.red;
+        sprite.color = Color.red;
     }
 
     private void OnMouseExit()
     {
-        wallSprite.color = defaultColor;
+        sprite.color = defaultColor;
     }
 }
