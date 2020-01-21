@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileTurret : MonoBehaviour
-{
-    public float detectionRadius;
+public class LaserTurret : MonoBehaviour
+{	
+	public float detectionRadius;
     public float rateOfFire;
     public float turnSpeed;
 
-    public GameObject missile;
+    public GameObject laser;
     public enum TargetMode { NEAREST, FURTHEST, WEAKEST, STRONGEST };
     public TargetMode targetMode = TargetMode.NEAREST;
 
@@ -17,23 +17,24 @@ public class MissileTurret : MonoBehaviour
 
     GameObject currentTarget;
     List<GameObject> targetsInRange;
-
+    
     // Start is called before the first frame update
     void Start()
     {
-        targetsInRange = new List<GameObject>();
+    	targetsInRange = new List<GameObject>();
         CircleCollider2D detectionCollider = GetComponent<CircleCollider2D>();
         detectionCollider.radius = detectionRadius;
-        turretHealth = 250;
+        turretHealth = 250;    
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
+    	timer += Time.deltaTime;
         if (targetsInRange.Count > 0 && currentTarget != null)
         {
-            //rotate towards the current target
+
+        	//rotate towards the current target
             float targetAngle = Mathf.Atan2(
                 transform.position.y - currentTarget.transform.position.y,
                 transform.position.x - currentTarget.transform.position.x) * Mathf.Rad2Deg + 90f;
@@ -44,20 +45,20 @@ public class MissileTurret : MonoBehaviour
 
             if (IsNearTargetAngle(transform.eulerAngles.z, targetAngle, 5f))
             {
-                if (timer >= rateOfFire)
+            	if (timer >= rateOfFire)
                 {
-                    GameObject missileClone = Instantiate(missile, transform.position, Quaternion.identity);
-                    Missile missileScript = missileClone.GetComponent<Missile>();
+                    GameObject laserClone = Instantiate(laserPoint, transform.position, Quaternion.identity);
+                    LaserPoint laserPointScript = laserClone.GetComponent<LaserPoint>();
+        			
+        			laserPointScript.Fire(currentTarget.transform);
 
-                    missileScript.Seek(currentTarget.transform);
-
-                    timer = 0;
-                }
-            }
+        			timer = 0;
+        		}
+        	}
         }
     }
-
-    bool IsNearTargetAngle(float current, float target, float offset)
+	
+	bool IsNearTargetAngle(float current, float target, float offset)
     {
         if (Mathf.Abs(target - current) <= offset)
             return true;
@@ -199,4 +200,5 @@ public class MissileTurret : MonoBehaviour
             }
         }
     }
+
 }
