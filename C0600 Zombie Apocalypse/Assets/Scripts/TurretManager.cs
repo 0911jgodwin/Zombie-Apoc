@@ -5,8 +5,7 @@ using UnityEngine;
 public class TurretManager : MonoBehaviour
 {
     private List<Turret> turrets;
-    private bool active = false;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -23,16 +22,6 @@ public class TurretManager : MonoBehaviour
                 Debug.Log(turret);
             }
         }
-    }
-
-    public void SetActive(bool boolean)
-    {
-        active = boolean;
-    }
-
-    public bool IsActive()
-    {
-        return active;
     }
 
     public void Add(Turret turret)
