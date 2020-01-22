@@ -4,8 +4,8 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - point: {fileID: 4768367829469244823, guid: 88ab1635a85f1574384a59809f7cec20, type: 3}
-  - wall: {fileID: 1871528261069087040, guid: 534f55a697944ea4ba1720f2fdd8a619, type: 3}
+  - point: {fileID: 4768367829469244823, guid: 5e8553495d073424aa70166c8d1467b0, type: 3}
+  - wall: {fileID: 1871528261069087040, guid: 3a3848776210b2747962d01ab7cef97e, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
