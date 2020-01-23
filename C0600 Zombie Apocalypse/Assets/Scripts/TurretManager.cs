@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurretManager : MonoBehaviour
 {
-    private List<Turret> turrets;
+    private List<Turret> turrets = new List<Turret>();
     
     // Start is called before the first frame update
     void Start()

@@ -31,6 +31,7 @@ public class Slot : MonoBehaviour
             if (!buildManager.PointsActive())
             {
                 buildManager.ActivatePoints();
+                if (buildManager.WallsActive()) { buildManager.DeactivateWalls(); }
             }
             else
             {
@@ -42,6 +43,7 @@ public class Slot : MonoBehaviour
             if (!buildManager.WallsActive())
             {
                 buildManager.ActivateWalls();
+                if (buildManager.PointsActive()) { buildManager.DeactivatePoints(); }
             }
             else
             {

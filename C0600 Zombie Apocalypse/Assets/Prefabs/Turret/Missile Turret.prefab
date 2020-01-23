@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2179563463374946252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 2179563463920497419}
   m_RootOrder: 0
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 2179563463920497419}
   - component: {fileID: 2179563463920497417}
   - component: {fileID: 4953560579535518102}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Missile Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,9 +145,12 @@ MonoBehaviour:
   detectionRadius: 7
   rateOfFire: 2
   turnSpeed: 120
-  missile: {fileID: 4603100919599425180, guid: b618e80340e6f484a99c9c6cd7d5de90, type: 3}
   targetMode: 0
+  timer: 0
   turretHealth: 250
+  currentTarget: {fileID: 0}
+  targetsInRange: []
+  missile: {fileID: 4603100919599425180, guid: b618e80340e6f484a99c9c6cd7d5de90, type: 3}
 --- !u!1 &4986948630040921202
 GameObject:
   m_ObjectHideFlags: 0
