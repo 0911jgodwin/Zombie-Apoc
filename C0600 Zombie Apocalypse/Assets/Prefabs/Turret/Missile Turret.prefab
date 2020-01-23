@@ -69,12 +69,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0fb9c8a7a03bef444aa69491ba66216b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b159c49623edaa743a95e7d09c074599, type: 3}
   m_Color: {r: 0.1432894, g: 0.26268503, b: 0.8679245, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -139,15 +139,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2179563463920497420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01b4d381bce9bc649aed92b197c86971, type: 3}
+  m_Script: {fileID: 11500000, guid: d6ad256b3c581904ea2a4381b48d5b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 4
+  detectionRadius: 7
   rateOfFire: 2
   turnSpeed: 120
-  missile: {fileID: 4603100919599425180, guid: d7f5a12a3e9986546be43dce7d3bc90f, type: 3}
+  missile: {fileID: 4603100919599425180, guid: b618e80340e6f484a99c9c6cd7d5de90, type: 3}
   targetMode: 0
-  turretHealth: 25000
+  turretHealth: 250
 --- !u!1 &4986948630040921202
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,6 +205,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4986948630040921202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75f49fd167f6e334f9cc29ef6a35d4d0, type: 3}
+  m_Script: {fileID: 11500000, guid: dd45fcb08683fe44997ef69b22d39708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

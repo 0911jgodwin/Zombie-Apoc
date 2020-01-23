@@ -7,15 +7,6 @@ public class GridPoint : MonoBehaviour
     SpriteRenderer pointSprite;
     Color defaultColor;
 
-    public int X { get; set; }
-    public int Y { get; set; }
-
-    public void SetPoint(int x, int y)
-    {
-        this.X = x;
-        this.Y = y;
-    }
-
     void Start()
     {
         pointSprite = GetComponent<SpriteRenderer>();

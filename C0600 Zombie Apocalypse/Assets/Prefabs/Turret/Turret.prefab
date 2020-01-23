@@ -57,7 +57,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 899168939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75f49fd167f6e334f9cc29ef6a35d4d0, type: 3}
+  m_Script: {fileID: 11500000, guid: dd45fcb08683fe44997ef69b22d39708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6560176991277924629
@@ -129,12 +129,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0fb9c8a7a03bef444aa69491ba66216b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b159c49623edaa743a95e7d09c074599, type: 3}
   m_Color: {r: 0.9622642, g: 0.040850822, b: 0.040850822, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -150,7 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6560176991386684882}
   - component: {fileID: 6560176991386684880}
-  - component: {fileID: 6560176991386684883}
+  - component: {fileID: 5704494588115629320}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -190,7 +190,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
---- !u!114 &6560176991386684883
+--- !u!114 &5704494588115629320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,12 +199,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6560176991386684885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 319bf6b075521584e9b9cb71a68fa5d1, type: 3}
+  m_Script: {fileID: 11500000, guid: c3d5250b884237b44849fb2251ce6eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRadius: 4
   rateOfFire: 0.1
   turnSpeed: 120
-  bullet: {fileID: 6124275338922891110, guid: 5774f47c91c58e84892436c6d081b357, type: 3}
   targetMode: 0
-  turretHealth: 0
+  timer: 0
+  turretHealth: 250
+  currentTarget: {fileID: 0}
+  targetsInRange: []
+  bullet: {fileID: 6124275338922891110, guid: 169476acf05f9ac40bd54fc22447ee16, type: 3}

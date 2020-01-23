@@ -8,18 +8,19 @@ public class Turret : MonoBehaviour
     public float rateOfFire;
     public float turnSpeed;
 
-    public GameObject bullet;
+    //public GameObject bullet;
     public enum TargetMode { NEAREST, FURTHEST, WEAKEST, STRONGEST };
     public TargetMode targetMode = TargetMode.NEAREST;
 
-    float timer;
+    public float timer;
     public float turretHealth;
 
-    GameObject currentTarget;
-    List<GameObject> targetsInRange;
+    public GameObject currentTarget;
+
+    public List<GameObject> targetsInRange;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         targetsInRange = new List<GameObject>();
         CircleCollider2D detectionCollider = GetComponent<CircleCollider2D>();
@@ -31,6 +32,11 @@ public class Turret : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+        Aim();
+    }
+
+    void Aim()
+    {
         if (targetsInRange.Count > 0 && currentTarget != null)
         {
             //rotate towards the current target
@@ -46,37 +52,24 @@ public class Turret : MonoBehaviour
             {
                 if (timer >= rateOfFire)
                 {
-                    GameObject bulletClone = Instantiate(bullet, transform.position, Quaternion.identity);
-                    Bullet bulletScript = bulletClone.GetComponent<Bullet>();
-
-                    bulletScript.SetVelocityVectors(
-                        Mathf.Cos((targetAngle + 90f) * Mathf.Deg2Rad),
-                        Mathf.Sin((targetAngle + 90f) * Mathf.Deg2Rad),
-                        100f);
-
+                    Fire(targetAngle);
                     timer = 0;
                 }
             }
         }
     }
 
-    /*
-    * bool IsNearTargetAngle(float current, float target, float offset) 
-    *
-    * Author1: Olabode Bello(ob234) 
-    * Author2: Joe Godwin 
-    * Date: 14/1/2020
-    * Course: computer Science(C0600)
-    * 
-    * Function: validation
-    * 
-    * Description: checks the position of the target is within the range of the turret 
-    *
-    * Parameter: current, target, offset -position of zombies in float format.
-    *
-    * Return True (if targets in range) or false(if target not in range)
-    */
-    bool IsNearTargetAngle (float current, float target, float offset)
+    public virtual void Fire(float targetAngle)
+    {
+        //override with subclass fire method
+    }
+
+    protected GameObject GetCurrentTarget()
+    {
+        return currentTarget;
+    }
+
+    public bool IsNearTargetAngle (float current, float target, float offset)
     {
         if (Mathf.Abs(target - current) <= offset)
             return true;
