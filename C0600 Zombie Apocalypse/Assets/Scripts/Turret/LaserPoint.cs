@@ -1,9 +1,9 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /*
 point at which the laser originates from, and a fire method to shoot the laser
-*/
+
 public class LaserPoint : MonoBehaviour
 {
 
@@ -33,3 +33,4 @@ public class LaserPoint : MonoBehaviour
     }
 
 }
+*/

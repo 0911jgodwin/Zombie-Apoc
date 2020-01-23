@@ -37,3 +37,23 @@ sysinfo.txt
 *.meta
 *.meta
 *.meta
+
+# Ignore vscode folder
+.vscode
+
+# Ignore Library folder
+Library
+
+# Ignore Logs folder
+Logs
+
+# Ignore Packages folder
+Packages
+
+# Ignore ProjectSettings folder
+ProjectSettings
+
+# Ignore Temp folder
+Temp
+
+.DS_Store

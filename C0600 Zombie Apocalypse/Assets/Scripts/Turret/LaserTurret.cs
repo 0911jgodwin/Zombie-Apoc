@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -117,7 +117,7 @@ public class LaserTurret : MonoBehaviour
     * Parameter: Nearest, Furthest, Weakest, Strongest -Enum
     *
     * Return: chosen targeting execution 
-    */
+    
     void TargetPriority()
     {
         switch (targetMode)
@@ -202,3 +202,4 @@ public class LaserTurret : MonoBehaviour
     }
 
 }
+*/
