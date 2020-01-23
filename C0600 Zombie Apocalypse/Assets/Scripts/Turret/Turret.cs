@@ -7,8 +7,7 @@ public class Turret : MonoBehaviour
     public float detectionRadius;
     public float rateOfFire;
     public float turnSpeed;
-
-    //public GameObject bullet;
+    
     public enum TargetMode { NEAREST, FURTHEST, WEAKEST, STRONGEST };
     public TargetMode targetMode = TargetMode.NEAREST;
 
