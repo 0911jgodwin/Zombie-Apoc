@@ -2,44 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
-{
-    public float detectionRadius;
+public class LaserTurret : MonoBehaviour
+{	
+	public float detectionRadius;
     public float rateOfFire;
     public float turnSpeed;
 
-    //public GameObject bullet;
+    public GameObject laser;
     public enum TargetMode { NEAREST, FURTHEST, WEAKEST, STRONGEST };
     public TargetMode targetMode = TargetMode.NEAREST;
 
-    public float timer;
+    float timer;
     public float turretHealth;
 
-    public GameObject currentTarget;
-
-    public List<GameObject> targetsInRange;
-
+    GameObject currentTarget;
+    List<GameObject> targetsInRange;
+    
     // Start is called before the first frame update
-    protected void Start()
+    void Start()
     {
-        targetsInRange = new List<GameObject>();
+    	targetsInRange = new List<GameObject>();
         CircleCollider2D detectionCollider = GetComponent<CircleCollider2D>();
         detectionCollider.radius = detectionRadius;
-        turretHealth = 250;
+        turretHealth = 250;    
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        Aim();
-    }
-
-    void Aim()
-    {
+    	timer += Time.deltaTime;
         if (targetsInRange.Count > 0 && currentTarget != null)
         {
-            //rotate towards the current target
+
+        	//rotate towards the current target
             float targetAngle = Mathf.Atan2(
                 transform.position.y - currentTarget.transform.position.y,
                 transform.position.x - currentTarget.transform.position.x) * Mathf.Rad2Deg + 90f;
@@ -50,33 +45,27 @@ public class Turret : MonoBehaviour
 
             if (IsNearTargetAngle(transform.eulerAngles.z, targetAngle, 5f))
             {
-                if (timer >= rateOfFire)
+            	if (timer >= rateOfFire)
                 {
-                    Fire(targetAngle);
-                    timer = 0;
-                }
-            }
+                    GameObject laserClone = Instantiate(laserPoint, transform.position, Quaternion.identity);
+                    LaserPoint laserPointScript = laserClone.GetComponent<LaserPoint>();
+        			
+        			laserPointScript.Fire(currentTarget.transform);
+
+        			timer = 0;
+        		}
+        	}
         }
     }
-
-    public virtual void Fire(float targetAngle)
-    {
-        //override with subclass fire method
-    }
-
-    protected GameObject GetCurrentTarget()
-    {
-        return currentTarget;
-    }
-
-    public bool IsNearTargetAngle (float current, float target, float offset)
+	
+	bool IsNearTargetAngle(float current, float target, float offset)
     {
         if (Mathf.Abs(target - current) <= offset)
             return true;
         return false;
     }
 
-    void OnTriggerEnter2D (Collider2D collider)
+    void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.tag == "Zombie")
         {
@@ -89,23 +78,7 @@ public class Turret : MonoBehaviour
         }
     }
 
-        /*
-    * void OnTriggerExit2D (Collider2D collider)
-    *
-    * Author1: Olabode Bello(ob234) 
-    * Author2: Alone  
-    * Date: 14/1/2020
-    * Course: computer Science(C0600)
-    * 
-    * Function: Selection control 
-    * 
-    * Description: allows the value of a variable to change the control flow of the targeting execution 
-    *
-    * Parameter: Nearest, Furthest, Weakest, Strongest -Enum
-    *
-    * Return: chosen targeting execution 
-    */
-    void OnTriggerExit2D (Collider2D collider)
+    void OnTriggerExit2D(Collider2D collider)
     {
         targetsInRange.Remove(collider.gameObject);
 
@@ -164,22 +137,6 @@ public class Turret : MonoBehaviour
         }
     }
 
-    /*
-    * void TargetNearest() 
-    *
-    * Author1: Olabode Bello(ob234) 
-    * Author2: Joe godwin 
-    * Date: 14/1/2020
-    * Course: computer Science(C0600)
-    * 
-    * Function: set & validate 
-    * 
-    * Description: sets the turret to target zombies that are nearest to the turret and within its radius 
-    *
-    * Parameter: None
-    *
-    * Return: target closest to turret thats within range. 
-    */
     void TargetNearest()
     {
         float closestDist = 0.0f;
@@ -196,23 +153,6 @@ public class Turret : MonoBehaviour
         }
     }
 
-    /*
-    * void TargetFurthest()
-    *
-    * Author1: Olabode Bello(ob234) 
-    * Author2: Alone 
-    * Date: 14/1/2020
-    * Course: computer Science(C0600)
-    * 
-    * Function: set & validate 
-    * 
-    * Description: sets the turret to target zombies that are furthest away from the turret and within its radius 
-    *
-    *
-    * Parameter: furthestDist, dist  - float
-    *
-    * Return: target furthest away from turret thats within range. 
-    */
     void TargetFurthest()
     {
         float furthestDist = 0.0f;
@@ -229,23 +169,6 @@ public class Turret : MonoBehaviour
         }
     }
 
-    /*
-    * void TargetWeakest()
-    *
-    * Author1: Olabode Bello(ob234) 
-    * Author2: Alone 
-    * Date: 14/1/2020
-    * Course: computer Science(C0600)
-    * 
-    * Function: set & validate 
-    * 
-    * Description: sets the turret to target zombies that have the lowest health in hords within the turrets radius 
-    *
-    *
-    * Parameter: lowestHealth, MaxHp  - Integer
-    *
-    * Return: position of target with lowest health in radius 
-    */
     void TargetWeakest()
     {
         int lowestHealth = currentTarget.GetComponent<Zombie>().health;
@@ -262,23 +185,6 @@ public class Turret : MonoBehaviour
         }
     }
 
-    /*
-    * void TargetStrongest()
-    *
-    * Author1: Olabode Bello(ob234) 
-    * Author2: Alone 
-    * Date: 14/1/2020
-    * Course: computer Science(C0600)
-    * 
-    * Function: set & validate 
-    * 
-    * Description: sets the turret to target zombies that have the highest health in hords within the turrets radius 
-    *
-    *
-    * Parameter: highestHealth, MaxHp  - Integer
-    *
-    * Return: position of target with highest health in radius
-    */
     void TargetStrongest()
     {
         int highestHealth = currentTarget.GetComponent<Zombie>().health;
@@ -294,4 +200,5 @@ public class Turret : MonoBehaviour
             }
         }
     }
+
 }
