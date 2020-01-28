@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f6cfd3bc4c241d459c856b2a9493e7f, type: 3}
+  m_Script: {fileID: 11500000, guid: befc19d2639f1ce48ae97fdaced22398, type: 3}
   m_Name: CompositeHordeBehaviour
   m_EditorClassIdentifier: 
   behaviours:
-  - {fileID: 11400000, guid: 678878c0efdb7d84c93630cab5dad895, type: 2}
-  - {fileID: 11400000, guid: 05188f9e5c2051441ac4fa7df78aee16, type: 2}
-  - {fileID: 11400000, guid: b74e71150f31b704db560b3cffb1f277, type: 2}
-  - {fileID: 11400000, guid: 0b60b45069ada1047a8d3fd0576c5477, type: 2}
-  - {fileID: 11400000, guid: cfb10b90039193d4aab752f3b4177ea9, type: 2}
+  - {fileID: 11400000, guid: 159e1990f4cc2644fa4a4bfc6118d786, type: 2}
+  - {fileID: 11400000, guid: ad09a8a335d9c814ea55f24cd87df2e9, type: 2}
+  - {fileID: 11400000, guid: 7d7af5ee2706c314db84c52de7fb2c5a, type: 2}
+  - {fileID: 11400000, guid: c4d186fb78bf9e944b9491839c890f16, type: 2}
+  - {fileID: 11400000, guid: 35317f0b4169a4544804f6e856734794, type: 2}
   weights:
   - 2
   - 1
   - 0.2
   - 0.05
-  - 0.4
+  - 0

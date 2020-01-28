@@ -11,7 +11,6 @@ public class Horde : MonoBehaviour
 
     [Range(10, 250)]
     public int startingCount = 250;
-    const float hordeDensity = 0.08f;
 
     [Range(1f, 100f)]
     public float driveFactor = 10f;
@@ -33,12 +32,15 @@ public class Horde : MonoBehaviour
         squareMaxSpeed = maxSpeed * maxSpeed;
         squareNeighbourRadius = neighbourRadius * neighbourRadius;
         squareAvoidanceRadius = squareNeighbourRadius * avoidanceRadiusMultiplier * avoidanceRadiusMultiplier;
+    }
 
+    public void Spawn(float minX, float maxX, float minY, float maxY)
+    {
         for (int i = 0; i < startingCount; i++)
         {
             Zombie newZombie = Instantiate(
                 zombiePrefab,
-                Random.insideUnitCircle * startingCount * hordeDensity,
+                new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY)),
                 Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)),
                 transform
                 );
@@ -62,6 +64,7 @@ public class Horde : MonoBehaviour
             }
             zombie.Move(move);
         }
+        if(zombies.Count == 0) { Object.Destroy(this.gameObject); }
     }
 
     public void removeZombie(Zombie deadZombie)

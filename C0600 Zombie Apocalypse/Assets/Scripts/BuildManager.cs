@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
-    private bool wallActive;
     private GameObject activeWalls;
-
-    private bool pointActive;
     private GameObject activePoints;
 
     // Start is called before the first frame update
@@ -15,9 +12,6 @@ public class BuildManager : MonoBehaviour
     {
         activeWalls  = GameObject.Find("Grid/Walls");
         activePoints = GameObject.Find("Grid/Points");
-
-        wallActive = true;
-        pointActive = true;
     }
 
     // Update is called once per frame
@@ -28,35 +22,31 @@ public class BuildManager : MonoBehaviour
 
     public bool WallsActive()
     {
-        return wallActive;
+        return activeWalls.activeSelf;
     }
 
     public void ActivateWalls()
     {
-        wallActive = true;
         activeWalls.SetActive(true);
     }
 
     public void DeactivateWalls()
     {
-        wallActive = false;
         activeWalls.SetActive(false);
     }
 
     public bool PointsActive()
     {
-        return pointActive;
+        return activePoints.activeSelf;
     }
 
     public void ActivatePoints()
     {
-        pointActive = true;
         activePoints.SetActive(true);
     }
 
     public void DeactivatePoints()
     {
-        pointActive = false;
         activePoints.SetActive(false);
     }
 }
