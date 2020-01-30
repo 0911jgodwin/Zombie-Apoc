@@ -46,7 +46,7 @@ MonoBehaviour:
   zombiePrefab: {fileID: 6030832752319609345, guid: 09c3a59dec5aef04ab8d7eccdb60e082,
     type: 3}
   behaviour: {fileID: 11400000, guid: 4fd66f79ef0e05440b8cf5eca8b4f962, type: 2}
-  startingCount: 250
+  startingCount: 10
   driveFactor: 10
   maxSpeed: 5
   neighbourRadius: 1.5
