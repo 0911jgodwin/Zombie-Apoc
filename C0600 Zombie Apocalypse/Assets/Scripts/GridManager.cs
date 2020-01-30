@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-public class Grid : MonoBehaviour
-{/*
+public class GridManager : MonoBehaviour
+{
+    private GameObject activeWalls;
+    private GameObject activePoints;
+
     [SerializeField]
     private int width = 0;
     [SerializeField]
@@ -16,23 +18,16 @@ public class Grid : MonoBehaviour
     private GameObject wall;
     private float wallWidth;
 
-    private BuildManager buildManager;
-
     // Start is called before the first frame update
     void Start()
     {
         wallWidth = wall.GetComponent<SpriteRenderer>().bounds.size.x;
 
-        buildManager  = gameObject.AddComponent(typeof(BuildManager))  as BuildManager;
-
         GenerateWalls();
         GeneratePoints();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-
+        activeWalls = GameObject.Find("GridManager/Walls");
+        activePoints = GameObject.Find("GridManager/Points");
     }
 
     private void GeneratePoints()
@@ -45,22 +40,22 @@ public class Grid : MonoBehaviour
                 newPoint.name = "Point " + (y + (height * x) + 1);
                 newPoint.transform.position = new Vector3((x * wallWidth), (y * wallWidth), 0);
                 newPoint.GetComponent<SpriteRenderer>().sortingOrder = 1;
-                newPoint.transform.parent = GameObject.Find("Grid/Points").transform;
+                newPoint.transform.parent = GameObject.Find("GridManager/Points").transform;
             }
         }
     }
 
     private void GenerateWalls()
     {
-        GameObject hWalls = new GameObject(); hWalls.name = "Horizontal Walls"; hWalls.transform.parent = GameObject.Find("Grid/Walls").transform;
-        GameObject vWalls = new GameObject(); vWalls.name = "Vertical Walls";   vWalls.transform.parent = GameObject.Find("Grid/Walls").transform;
-        
+        GameObject hWalls = new GameObject(); hWalls.name = "Horizontal Walls"; hWalls.transform.parent = GameObject.Find("GridManager/Walls").transform;
+        GameObject vWalls = new GameObject(); vWalls.name = "Vertical Walls"; vWalls.transform.parent = GameObject.Find("GridManager/Walls").transform;
+
         int count = 0;
 
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
-            { 
+            {
                 if (!(x == width - 1))
                 {
                     GameObject hWall = Instantiate(wall);
@@ -79,9 +74,39 @@ public class Grid : MonoBehaviour
                     vWall.transform.eulerAngles = new Vector3(0, 0, 90f);
                     vWall.transform.parent = vWalls.transform;
                     vWall.GetComponent<GridWall>().SetID(count);
-                    count++;                    
+                    count++;
                 }
             }
         }
-    }*/
+    }
+
+    public bool WallsActive()
+    {
+        return activeWalls.activeSelf;
+    }
+
+    public void ActivateWalls()
+    {
+        activeWalls.SetActive(true);
+    }
+
+    public void DeactivateWalls()
+    {
+        activeWalls.SetActive(false);
+    }
+
+    public bool PointsActive()
+    {
+        return activePoints.activeSelf;
+    }
+
+    public void ActivatePoints()
+    {
+        activePoints.SetActive(true);
+    }
+
+    public void DeactivatePoints()
+    {
+        activePoints.SetActive(false);
+    }
 }

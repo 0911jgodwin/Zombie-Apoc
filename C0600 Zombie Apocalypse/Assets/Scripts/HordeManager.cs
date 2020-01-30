@@ -44,7 +44,7 @@ public class HordeManager : MonoBehaviour
 
     private void CreateHorde(SpawnPosition position, float count)
     {
-        Horde newHorde = Instantiate( hordePrefab, new Vector3(0, 0, 0), Quaternion.identity, transform);
+        Horde newHorde = Instantiate(hordePrefab, transform);
         newHorde.name = "Horde " + hordeCounter;
         hordeCounter++;
         hordes.Add(newHorde);

@@ -5,7 +5,11 @@ using UnityEngine;
 public class TurretManager : MonoBehaviour
 {
     private List<Turret> turrets = new List<Turret>();
-    
+    public enum TurretType { GUN, MISSILE, LASER, FLAME };
+
+    public GunTurret gunTurret;
+    public MissileTurret missileTurret;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,17 +19,25 @@ public class TurretManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (turrets != null)
-        {
-            foreach (Turret turret in turrets)
-            {
-                Debug.Log(turret);
-            }
-        }
+
     }
 
-    public void Add(Turret turret)
+    public void placeTurret(Vector3 location, TurretType type) 
     {
-        turrets.Add(turret);
+        Turret newTurret = null;
+        switch (type)
+        {
+            case TurretType.GUN:
+                newTurret = Instantiate(gunTurret, location, Quaternion.identity, GameObject.Find("GameManager/TurretManager").transform);
+                break;
+
+            case TurretType.MISSILE:
+                newTurret = Instantiate(missileTurret, location, Quaternion.identity, transform);
+                break;
+        }
+        if (newTurret != null)
+        {
+            turrets.Add(newTurret);
+        }
     }
 }
