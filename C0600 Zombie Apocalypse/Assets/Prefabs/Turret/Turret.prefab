@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 6560176991277924627}
   - component: {fileID: 1843450021}
   - component: {fileID: 1843450022}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Turret Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
