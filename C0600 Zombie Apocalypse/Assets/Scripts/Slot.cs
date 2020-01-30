@@ -8,7 +8,9 @@ public class Slot : MonoBehaviour
     private GameObject missileTurret;
     private GameObject wall;
 
-    private GridManager gridManager;
+    GridManager gridManager;
+
+    public string lastSelected;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +19,7 @@ public class Slot : MonoBehaviour
         missileTurret = GameObject.Find("Inventory/SlotMissileTurret");
         wall = GameObject.Find("Inventory/SlotWall");
 
-        gridManager = GridManager.Find("GameManager/GridManager");
+        gridManager = GameObject.Find("GameManager/GridManager").GetComponent<GridManager>();
     }
 
     // Update is called once per frame
@@ -28,6 +30,8 @@ public class Slot : MonoBehaviour
 
     public void OnItemClicked()
     {
+        GameObject.Find("GameManager").GetComponent<GameManager>().uiSelection = gameObject.name;
+
         if (gameObject.name == gunTurret.name || gameObject.name == missileTurret.name)
         {
             if (!gridManager.PointsActive())
@@ -40,6 +44,7 @@ public class Slot : MonoBehaviour
                 gridManager.DeactivatePoints();
             }
         }
+
         if (gameObject.name == wall.name)
         {
             if (!gridManager.WallsActive())
@@ -52,5 +57,7 @@ public class Slot : MonoBehaviour
                 gridManager.DeactivateWalls();
             }
         }
+
+        lastSelected = gameObject.name;
     }
 }

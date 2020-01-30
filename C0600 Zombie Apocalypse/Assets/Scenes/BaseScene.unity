@@ -407,6 +407,8 @@ MonoBehaviour:
     type: 3}
   gridManager: {fileID: 825606536819173848, guid: d2ab8242a8d7b4642ac14f842d8bfe89,
     type: 3}
+  wallManager: {fileID: 6276886692472192720, guid: 656f741bce200994b9ee939a3231ddd5,
+    type: 3}
 --- !u!1 &604409951
 GameObject:
   m_ObjectHideFlags: 0

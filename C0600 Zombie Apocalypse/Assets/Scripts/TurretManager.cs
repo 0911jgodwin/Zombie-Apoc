@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class TurretManager : MonoBehaviour
 {
-    private List<Turret> turrets = new List<Turret>();
-    public enum TurretType { GUN, MISSILE, LASER, FLAME };
+    private Hashtable turrets = new Hashtable();
 
     public GunTurret gunTurret;
     public MissileTurret missileTurret;
@@ -22,22 +21,27 @@ public class TurretManager : MonoBehaviour
 
     }
 
-    public void placeTurret(Vector3 location, TurretType type) 
+    public void placeTurret(Vector3 location, string type) 
     {
-        Turret newTurret = null;
-        switch (type)
+        if (!turrets.ContainsKey(location))
         {
-            case TurretType.GUN:
-                newTurret = Instantiate(gunTurret, location, Quaternion.identity, GameObject.Find("GameManager/TurretManager").transform);
-                break;
+            Turret newTurret = null;
+            switch (type)
+            {
+                case "SlotGunTurret":
+                    newTurret = Instantiate(gunTurret, location, Quaternion.identity, GameObject.Find("GameManager/TurretManager").transform);
+                    break;
 
-            case TurretType.MISSILE:
-                newTurret = Instantiate(missileTurret, location, Quaternion.identity, transform);
-                break;
-        }
-        if (newTurret != null)
-        {
-            turrets.Add(newTurret);
+                case "SlotMissileTurret":
+                    newTurret = Instantiate(missileTurret, location, Quaternion.identity, GameObject.Find("GameManager/TurretManager").transform);
+                    break;
+            }
+
+            if (newTurret != null)
+            {
+                //turrets.Add(newTurret);
+                turrets.Add(location, newTurret);
+            }
         }
     }
 }
