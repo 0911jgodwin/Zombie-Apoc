@@ -88,6 +88,22 @@ public class Turret : MonoBehaviour
         }
     }
 
+        /*
+    * void OnTriggerExit2D (Collider2D collider)
+    *
+    * Author1: Olabode Bello(ob234) 
+    * Author2: Alone  
+    * Date: 14/1/2020
+    * Course: computer Science(C0600)
+    * 
+    * Function: Selection control 
+    * 
+    * Description: allows the value of a variable to change the control flow of the targeting execution 
+    *
+    * Parameter: Nearest, Furthest, Weakest, Strongest -Enum
+    *
+    * Return: chosen targeting execution 
+    */
     void OnTriggerExit2D (Collider2D collider)
     {
         targetsInRange.Remove(collider.gameObject);
@@ -111,6 +127,23 @@ public class Turret : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    
+    /*
+    * void TargetPriority()
+    *
+    * Author1: Olabode Bello(ob234) 
+    * Author2: Alone  
+    * Date: 14/1/2020
+    * Course: computer Science(C0600)
+    * 
+    * Function: Selection control 
+    * 
+    * Description: allows the value of a variable to change the control flow of the targeting execution 
+    *
+    * Parameter: Nearest, Furthest, Weakest, Strongest -Enum
+    *
+    * Return: chosen targeting execution 
+    */
     void TargetPriority()
     {
         switch (targetMode)
@@ -130,6 +163,22 @@ public class Turret : MonoBehaviour
         }
     }
 
+    /*
+    * void TargetNearest() 
+    *
+    * Author1: Olabode Bello(ob234) 
+    * Author2: Joe godwin 
+    * Date: 14/1/2020
+    * Course: computer Science(C0600)
+    * 
+    * Function: set & validate 
+    * 
+    * Description: sets the turret to target zombies that are nearest to the turret and within its radius 
+    *
+    * Parameter: None
+    *
+    * Return: target closest to turret thats within range. 
+    */
     void TargetNearest()
     {
         float closestDist = 0.0f;
@@ -146,6 +195,23 @@ public class Turret : MonoBehaviour
         }
     }
 
+    /*
+    * void TargetFurthest()
+    *
+    * Author1: Olabode Bello(ob234) 
+    * Author2: Alone 
+    * Date: 14/1/2020
+    * Course: computer Science(C0600)
+    * 
+    * Function: set & validate 
+    * 
+    * Description: sets the turret to target zombies that are furthest away from the turret and within its radius 
+    *
+    *
+    * Parameter: furthestDist, dist  - float
+    *
+    * Return: target furthest away from turret thats within range. 
+    */
     void TargetFurthest()
     {
         float furthestDist = 0.0f;
@@ -162,6 +228,23 @@ public class Turret : MonoBehaviour
         }
     }
 
+    /*
+    * void TargetWeakest()
+    *
+    * Author1: Olabode Bello(ob234) 
+    * Author2: Alone 
+    * Date: 14/1/2020
+    * Course: computer Science(C0600)
+    * 
+    * Function: set & validate 
+    * 
+    * Description: sets the turret to target zombies that have the lowest health in hords within the turrets radius 
+    *
+    *
+    * Parameter: lowestHealth, MaxHp  - Integer
+    *
+    * Return: position of target with lowest health in radius 
+    */
     void TargetWeakest()
     {
         int lowestHealth = currentTarget.GetComponent<Zombie>().health;
@@ -178,6 +261,23 @@ public class Turret : MonoBehaviour
         }
     }
 
+    /*
+    * void TargetStrongest()
+    *
+    * Author1: Olabode Bello(ob234) 
+    * Author2: Alone 
+    * Date: 14/1/2020
+    * Course: computer Science(C0600)
+    * 
+    * Function: set & validate 
+    * 
+    * Description: sets the turret to target zombies that have the highest health in hords within the turrets radius 
+    *
+    *
+    * Parameter: highestHealth, MaxHp  - Integer
+    *
+    * Return: position of target with highest health in radius
+    */
     void TargetStrongest()
     {
         int highestHealth = currentTarget.GetComponent<Zombie>().health;

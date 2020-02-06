@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Slot : MonoBehaviour
 {
-    private GameObject turretSlot;
-    private GameObject wallSlot;
+    private GameObject gunTurret;
+    private GameObject missileTurret;
+    private GameObject wall;
 
-    private BuildManager buildManager;
+    GridManager gridManager;
+
+    public string lastSelected;
 
     // Start is called before the first frame update
     void Start()
     {
-        turretSlot = GameObject.Find("Inventory/SlotTurret");
-        wallSlot = GameObject.Find("Inventory/SlotWall");
+        gunTurret = GameObject.Find("Inventory/SlotGunTurret");
+        missileTurret = GameObject.Find("Inventory/SlotMissileTurret");
+        wall = GameObject.Find("Inventory/SlotWall");
 
-        buildManager = gameObject.AddComponent(typeof(BuildManager)) as BuildManager;
+        gridManager = GameObject.Find("GameManager/GridManager").GetComponent<GridManager>();
     }
 
     // Update is called once per frame
@@ -26,29 +30,34 @@ public class Slot : MonoBehaviour
 
     public void OnItemClicked()
     {
-        if (gameObject.name == turretSlot.name)
+        GameObject.Find("GameManager").GetComponent<GameManager>().uiSelection = gameObject.name;
+
+        if (gameObject.name == gunTurret.name || gameObject.name == missileTurret.name)
         {
-            if (!buildManager.PointsActive())
+            if (!gridManager.PointsActive())
             {
-                buildManager.ActivatePoints();
-                if (buildManager.WallsActive()) { buildManager.DeactivateWalls(); }
+                gridManager.ActivatePoints();
+                if (gridManager.WallsActive()) { gridManager.DeactivateWalls(); }
             }
             else
             {
-                buildManager.DeactivatePoints();
+                gridManager.DeactivatePoints();
             }
         }
-        if (gameObject.name == wallSlot.name)
+
+        if (gameObject.name == wall.name)
         {
-            if (!buildManager.WallsActive())
+            if (!gridManager.WallsActive())
             {
-                buildManager.ActivateWalls();
-                if (buildManager.PointsActive()) { buildManager.DeactivatePoints(); }
+                gridManager.ActivateWalls();
+                if (gridManager.PointsActive()) { gridManager.DeactivatePoints(); }
             }
             else
             {
-                buildManager.DeactivateWalls();
+                gridManager.DeactivateWalls();
             }
         }
+
+        lastSelected = gameObject.name;
     }
 }
