@@ -12,6 +12,12 @@ public class BuildManager : MonoBehaviour
     {
         activeWalls  = GameObject.Find("Grid/Walls");
         activePoints = GameObject.Find("Grid/Points");
+
+        if (activePoints != null & activeWalls != null)
+        {
+            DeactivatePoints();
+            DeactivateWalls();
+        }
     }
 
     // Update is called once per frame
