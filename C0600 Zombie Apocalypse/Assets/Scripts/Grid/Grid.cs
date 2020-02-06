@@ -29,6 +29,12 @@ public class Grid : MonoBehaviour
         GeneratePoints();
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
     private void GeneratePoints()
     {
         for (int x = 0; x < width; x++)
