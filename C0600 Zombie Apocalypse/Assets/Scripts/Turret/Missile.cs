@@ -68,12 +68,13 @@ public class Missile : MonoBehaviour
 
     void Damage(Transform Zombie)
     {
+        bool hit = false;
         Debug.Log("Hit!");
         Zombie zombie = Zombie.GetComponent<Zombie>();
 
         if (zombie != null)
         {
-            zombie.Damage(5);
+            hit = zombie.Damage(5);
         }
     }
 

@@ -16,33 +16,33 @@ public class HordeManager : MonoBehaviour
         // Spawn a wave up top
         if (Input.GetKey("i"))
         {
-            CreateHorde(SpawnPosition.TOP, 250);
+            CreateHorde(SpawnPosition.TOP);
             //horde.Spawn(0f, 64f, 62f, 71f);
         }
 
         // Spawn a wave down bottom
         if (Input.GetKey("k"))
         {
-            CreateHorde(SpawnPosition.BOTTOM, 250);
+            CreateHorde(SpawnPosition.BOTTOM);
             //horde.Spawn(0f, 64f, -10f, -1f);
         }
 
         // Spawn a wave on the right
         if (Input.GetKey("l"))
         {
-            CreateHorde(SpawnPosition.RIGHT, 250);
+            CreateHorde(SpawnPosition.RIGHT);
             //horde.Spawn(64f, 73f, 0f, 62f);
         }
 
         // Spawn a wave on the left
         if (Input.GetKey("j"))
         {
-            CreateHorde(SpawnPosition.LEFT, 250);
+            CreateHorde(SpawnPosition.LEFT);
             //horde.Spawn(-10f, -1f, 0f, 62f);
         }
     }
 
-    private void CreateHorde(SpawnPosition position, float count)
+    private void CreateHorde(SpawnPosition position)
     {
         Horde newHorde = Instantiate( hordePrefab, new Vector3(0, 0, 0), Quaternion.identity, transform);
         newHorde.name = "Horde " + hordeCounter;
@@ -51,16 +51,16 @@ public class HordeManager : MonoBehaviour
         switch (position)
         {
             case SpawnPosition.LEFT:
-                newHorde.Spawn(-10f, -1f, 0f, 62f, count);
+                newHorde.Spawn(-10f, -1f, 0f, 62f);
                 break;
             case SpawnPosition.TOP:
-                newHorde.Spawn(0f, 64f, 62f, 71f, count);
+                newHorde.Spawn(0f, 64f, 62f, 71f);
                 break;
             case SpawnPosition.RIGHT:
-                newHorde.Spawn(64f, 73f, 0f, 62f, count);
+                newHorde.Spawn(64f, 73f, 0f, 62f);
                 break;
             case SpawnPosition.BOTTOM:
-                newHorde.Spawn(0f, 64f, -10f, -1f, count);
+                newHorde.Spawn(0f, 64f, -10f, -1f);
                 break;
         }
     }

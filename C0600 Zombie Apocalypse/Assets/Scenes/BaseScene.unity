@@ -272,7 +272,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &560196693
 GameObject:
@@ -373,7 +373,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &565008350
+--- !u!1 &594643808
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -381,28 +381,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 565008351}
+  - component: {fileID: 594643809}
+  - component: {fileID: 594643810}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &565008351
+  m_IsActive: 0
+--- !u!4 &594643809
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 565008350}
+  m_GameObject: {fileID: 594643808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 58.478073, y: 26.70987, z: -1635.75}
+  m_LocalPosition: {x: 30.646566, y: 40.03579, z: -1569.8301}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &594643810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594643808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41ae75450400fca40bdcfc738a875b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  center: {x: 29, y: 0, z: 0}
+  size: {x: 58, y: 3, z: 0}
 --- !u!1 &604409951
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,7 +835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358f3c73e89b3e544844dfdf98a9c683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turret: {fileID: 1479361719456625564, guid: d711b6c756a41cd47bbbb366afd884c0, type: 3}
+  turret: {fileID: -7114855989080453632, guid: 6281c334829fe0742982d4c0d32ba5ea, type: 3}
   wall: {fileID: 5472946629572283632, guid: c232178b7d5a78b4aa5cf7996314aa59, type: 3}
 --- !u!4 &1074268197
 Transform:

@@ -34,9 +34,9 @@ public class Horde : MonoBehaviour
         squareAvoidanceRadius = squareNeighbourRadius * avoidanceRadiusMultiplier * avoidanceRadiusMultiplier;
     }
 
-    public void Spawn(float minX, float maxX, float minY, float maxY, float count)
+    public void Spawn(float minX, float maxX, float minY, float maxY)
     {
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < startingCount; i++)
         {
             Zombie newZombie = Instantiate(
                 zombiePrefab,
