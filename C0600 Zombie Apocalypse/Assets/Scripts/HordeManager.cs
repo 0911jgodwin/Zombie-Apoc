@@ -6,9 +6,14 @@ public class HordeManager : MonoBehaviour
 {
 
     public Horde hordePrefab;
-    List<Horde> hordes = new List<Horde>();
-    enum SpawnPosition { LEFT, TOP, RIGHT, BOTTOM };
+    public List<Horde> hordes = new List<Horde>();
+    public enum SpawnPosition { LEFT, TOP, RIGHT, BOTTOM };
     float hordeCounter = 0;
+
+    void Start()
+    {
+        hordes.Clear();
+    }
 
     // Update is called once per frame
     void Update()
@@ -40,9 +45,14 @@ public class HordeManager : MonoBehaviour
             CreateHorde(SpawnPosition.LEFT, 250);
             //horde.Spawn(-10f, -1f, 0f, 62f);
         }
+
+        if(hordes.Count == 0)
+        {
+            transform.parent.gameObject.GetComponent<GameManager>().ClearedWave();
+        }
     }
 
-    private void CreateHorde(SpawnPosition position, float count)
+    public void CreateHorde(SpawnPosition position, float count)
     {
         Horde newHorde = Instantiate(hordePrefab, transform);
         newHorde.name = "Horde " + hordeCounter;
@@ -65,4 +75,8 @@ public class HordeManager : MonoBehaviour
         }
     }
 
+    public void RemoveHorde(Horde deadHorde)
+    {
+        hordes.Remove(deadHorde);
+    }
 }

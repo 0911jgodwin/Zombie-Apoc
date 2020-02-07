@@ -64,7 +64,10 @@ public class Horde : MonoBehaviour
             }
             zombie.Move(move);
         }
-        if(zombies.Count == 0) { Object.Destroy(this.gameObject); }
+        if(zombies.Count == 0) {
+            transform.parent.gameObject.GetComponent<HordeManager>().RemoveHorde(this);
+            Object.Destroy(this.gameObject); 
+        }
     }
 
     public void removeZombie(Zombie deadZombie)
