@@ -8,6 +8,8 @@ public class TurretManager : MonoBehaviour
 
     public GunTurret gunTurret;
     public MissileTurret missileTurret;
+    private GameObject wall;
+    public float pointsOffset;
 
     // Start is called before the first frame update
     void Start()
