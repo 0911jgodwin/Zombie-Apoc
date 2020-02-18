@@ -7,7 +7,7 @@ public class StayInRadiusBehaviour : HordeBehaviour
 {
 
     public Vector2 center;
-    public float radius = 15f;
+    public float radius = 50f;
 
     public override Vector2 CalculateMove(Zombie zombie, List<Transform> context, Horde horde)
     {
