@@ -1,4 +1,4 @@
-﻿/*using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public class LightBeam : MonoBehaviour
     // initialises the lightbeam
     void Start()
     {
-    	lightbeam = GetComponent.<LineRenderer>();
+    	LineRenderer lightbeam = GetComponent<LineRenderer>();
         
     }
 
@@ -24,10 +24,10 @@ public class LightBeam : MonoBehaviour
     		{
     			lightbeam.setPosition(1,new Vector3(0,0,hit.distance));
     		}
-    	}else{
-    		lightbeam..setPosition(1,new Vector3(0,0,5000));
+    	}
+        else{
+    		lightbeam.setPosition(1,new Vector3(0,0,5000));
     	}
         
     }
 }
-*/

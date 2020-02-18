@@ -1,8 +1,10 @@
-﻿/*using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /*
 point at which the laser originates from, and a fire method to shoot the laser
+*/
+    [RequireComponent(typeof(LineRenderer))]
 
 public class LaserPoint : MonoBehaviour
 {
@@ -14,23 +16,10 @@ public class LaserPoint : MonoBehaviour
     {
     	if (Input.GetKeyDown(KeyCode.Space))
     	{
-    		Fire();
+    		LaserTurret.Fire();
     	}
         
     }
-
-    public void Fire()
-    {
-    	RaycastHit hit;
-
-    	if(Physics.Raycast(lPoint.transform.position, lPoint.transform.forward, out hit ))
-    	{
-    		if(hit.collider.tag == "Zombie")
-    		{
-    			print ("Hit : " + hit.collider.GameObject.Zombie);
-    		}
-    	}
-    }
+   
 
 }
-*/
