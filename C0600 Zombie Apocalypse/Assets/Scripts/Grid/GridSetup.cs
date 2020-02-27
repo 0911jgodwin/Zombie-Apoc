@@ -77,7 +77,9 @@ public class GridSetup : MonoBehaviour
                 newPoint.name = "Point " + (y + (height * x) + 1);
                 newPoint.transform.position = new Vector3(x * 10 + 0.625f, y * 10 + 0.625f, 0);
                 GridPoint pointScript = newPoint.GetComponent<GridPoint>();
+                /*
                 pointScript.SetPoint(x, y);
+                */
                 newPoint.transform.parent = points.transform;
             }
         }
