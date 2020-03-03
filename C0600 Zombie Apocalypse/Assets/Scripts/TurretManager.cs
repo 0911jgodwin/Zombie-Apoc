@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class TurretManager : MonoBehaviour
 {
-    private List<Turret> turrets;
-    
+    private Hashtable turrets = new Hashtable();
+
+    public GunTurret gunTurret;
+    public MissileTurret missileTurret;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,17 +18,30 @@ public class TurretManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (turrets != null)
-        {
-            foreach (Turret turret in turrets)
-            {
-                Debug.Log(turret);
-            }
-        }
+
     }
 
-    public void Add(Turret turret)
+    public void placeTurret(Vector3 location, string type) 
     {
-        turrets.Add(turret);
+        if (!turrets.ContainsKey(location))
+        {
+            Turret newTurret = null;
+            switch (type)
+            {
+                case "SlotGunTurret":
+                    newTurret = Instantiate(gunTurret, location, Quaternion.identity, GameObject.Find("GameManager/TurretManager").transform);
+                    break;
+
+                case "SlotMissileTurret":
+                    newTurret = Instantiate(missileTurret, location, Quaternion.identity, GameObject.Find("GameManager/TurretManager").transform);
+                    break;
+            }
+
+            if (newTurret != null)
+            {
+                //turrets.Add(newTurret);
+                turrets.Add(location, newTurret);
+            }
+        }
     }
 }

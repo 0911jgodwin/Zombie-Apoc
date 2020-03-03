@@ -16,6 +16,14 @@ public class Zombie : MonoBehaviour
         zombieCollider = GetComponent<Collider2D>();
     }
 
+    void Update()
+    {
+        if(Input.GetKey("u"))
+        {
+            this.Damage(9999);
+        }
+    }
+
     public void Move(Vector2 direction)
     {
         transform.up = direction;
