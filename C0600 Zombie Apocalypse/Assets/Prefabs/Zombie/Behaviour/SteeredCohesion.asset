@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e66f7de92cde1e43bf4b696b9c546c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 0084f1284ad2fa24db3ab748da357190, type: 3}
   m_Name: SteeredCohesion
   m_EditorClassIdentifier: 
   zombieSmoothTime: 0.5
