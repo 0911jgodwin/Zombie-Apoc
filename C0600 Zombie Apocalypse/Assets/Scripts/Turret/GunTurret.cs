@@ -15,7 +15,7 @@ public class GunTurret : Turret
     // Update is called once per frame
     public override void Fire(float targetAngle)
     {
-        GameObject bulletClone = Instantiate(bullet, transform.position, Quaternion.identity);
+        GameObject bulletClone = Instantiate(bullet, transform.position, Quaternion.identity, this.transform);
         Bullet bulletScript = bulletClone.GetComponent<Bullet>();
 
         bulletScript.SetVelocityVectors(

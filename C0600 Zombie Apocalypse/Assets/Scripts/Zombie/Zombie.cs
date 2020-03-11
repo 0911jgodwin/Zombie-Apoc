@@ -31,23 +31,6 @@ public class Zombie : MonoBehaviour
         transform.position += (Vector3)direction * Time.deltaTime;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Bullet")
-        {
-            health--;
-            Destroy(collision.gameObject);
-
-            if (health == 0)
-            {
-                GameObject parentHorde = transform.parent.gameObject;
-                Horde hordeScript = parentHorde.GetComponent<Horde>();
-                hordeScript.removeZombie(this);
-                Destroy(this.gameObject);
-            }
-        }
-    }
-
     public bool Damage(int incomingDamage)
     {
         health = health - incomingDamage;

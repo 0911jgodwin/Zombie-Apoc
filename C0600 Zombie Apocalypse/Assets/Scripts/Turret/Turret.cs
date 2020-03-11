@@ -120,6 +120,8 @@ public class Turret : MonoBehaviour
         turretHealth--;
         if (turretHealth <= 0)
         {
+            Debug.Log(transform.position);
+            GameObject.Find("GameManager/TurretManager").GetComponent<TurretManager>().RemoveTurret(transform.position);
             Destroy(this.gameObject);
         }
     }
@@ -152,12 +154,19 @@ public class Turret : MonoBehaviour
 
         for (int i = 0; i < targetsInRange.Count; i++)
         {
-            float dist = Vector3.Distance(transform.position, targetsInRange[i].transform.position);
-
-            if (!currentTarget || dist < closestDist)
+            if (targetsInRange[i] != null)
             {
-                currentTarget = targetsInRange[i];
-                closestDist = dist;
+                float dist = Vector3.Distance(transform.position, targetsInRange[i].transform.position);
+
+                if (!currentTarget || dist < closestDist)
+                {
+                    currentTarget = targetsInRange[i];
+                    closestDist = dist;
+                }
+            }
+            else
+            {
+                targetsInRange.RemoveAt(i);
             }
         }
     }
@@ -169,12 +178,19 @@ public class Turret : MonoBehaviour
 
         for (int i = 0; i < targetsInRange.Count; i++)
         {
-            float dist = Vector3.Distance(transform.position, targetsInRange[i].transform.position);
-
-            if (!currentTarget || dist > furthestDist)
+            if (targetsInRange[i] != null)
             {
-                currentTarget = targetsInRange[i];
-                furthestDist = dist;
+                float dist = Vector3.Distance(transform.position, targetsInRange[i].transform.position);
+
+                if (!currentTarget || dist > furthestDist)
+                {
+                    currentTarget = targetsInRange[i];
+                    furthestDist = dist;
+                }
+            }
+            else
+            {
+                targetsInRange.RemoveAt(i);
             }
         }
     }
@@ -194,12 +210,19 @@ public class Turret : MonoBehaviour
         }
         for (int i = 0; i < targetsInRange.Count; i++)
         {
-            float maxHp = targetsInRange[i].GetComponent<Zombie>().health;
-
-            if (!currentTarget || maxHp < lowestHealth)
+            if (targetsInRange[i] != null)
             {
-                lowestHealth = maxHp;
-                currentTarget = targetsInRange[i];
+                float maxHp = targetsInRange[i].GetComponent<Zombie>().health;
+
+                if (!currentTarget || maxHp < lowestHealth)
+                {
+                    lowestHealth = maxHp;
+                    currentTarget = targetsInRange[i];
+                }
+            }
+            else
+            {
+                targetsInRange.RemoveAt(i);
             }
         }
     }
@@ -221,12 +244,19 @@ public class Turret : MonoBehaviour
 
         for (int i = 0; i < targetsInRange.Count; i++)
         {
-            float maxHp = targetsInRange[i].GetComponent<Zombie>().health;
-
-            if (!currentTarget || maxHp > highestHealth)
+            if (targetsInRange[i] != null)
             {
-                highestHealth = maxHp;
-                currentTarget = targetsInRange[i];
+                float maxHp = targetsInRange[i].GetComponent<Zombie>().health;
+
+                if (!currentTarget || maxHp > highestHealth)
+                {
+                    highestHealth = maxHp;
+                    currentTarget = targetsInRange[i];
+                }
+            }
+            else
+            {
+                targetsInRange.RemoveAt(i);
             }
         }
     }
@@ -261,6 +291,15 @@ public class Turret : MonoBehaviour
         {
             TargetPriority();
         }
+        else
+        {
+            currentTarget = temp;
+        }
         targetsInRange.Add(temp);
+    }
+
+    public void RemoveTarget(GameObject zombie)
+    {
+        targetsInRange.Remove(zombie);
     }
 }

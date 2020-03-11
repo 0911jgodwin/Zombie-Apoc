@@ -10,9 +10,4 @@ public class FireTurret : Turret
         detectionRadius = 3f;
         rateOfFire = 0;
     }
-
-    public void RemoveTarget(GameObject zombie)
-    {
-        targetsInRange.Remove(zombie);
-    }
 }

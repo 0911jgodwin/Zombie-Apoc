@@ -67,12 +67,15 @@ public class Missile : MonoBehaviour
 
     void Damage(Transform Zombie)
     {
-        bool hit = false;
         Zombie zombie = Zombie.GetComponent<Zombie>();
 
         if (zombie != null)
         {
-            hit = zombie.Damage(5);
+            bool dead = zombie.Damage(5);
+            if (dead)
+            {
+                transform.parent.gameObject.GetComponent<MissileTurret>().RemoveTarget(Zombie.gameObject);
+            }
         }
     }
 
