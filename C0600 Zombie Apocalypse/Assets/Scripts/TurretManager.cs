@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class TurretManager : MonoBehaviour
 {
-    private Hashtable turrets = new Hashtable();
+    private Dictionary<Vector3, Turret> turrets = new Dictionary<Vector3, Turret>();
 
     public GunTurret gunTurret;
     public MissileTurret missileTurret;
+    private GameObject wall;
+    public float pointsOffset;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,7 @@ public class TurretManager : MonoBehaviour
             switch (type)
             {
                 case "SlotGunTurret":
+                    Debug.Log(location);
                     newTurret = Instantiate(gunTurret, location, Quaternion.identity, GameObject.Find("GameManager/TurretManager").transform);
                     break;
 
@@ -43,5 +46,22 @@ public class TurretManager : MonoBehaviour
                 turrets.Add(location, newTurret);
             }
         }
+        else
+        {
+            Debug.Log("Already got one there");
+        }
+    }
+
+    public void RemoveTurret(Vector3 turretLocation)
+    {
+        List<Vector3> keyList = new List<Vector3>(this.turrets.Keys);
+
+        foreach(Vector3 key in keyList)
+        {
+            Debug.Log(key);
+        }
+        Debug.Log(turrets.ContainsKey(turretLocation));
+        Debug.Log(turretLocation);
+        turrets.Remove(turretLocation);
     }
 }

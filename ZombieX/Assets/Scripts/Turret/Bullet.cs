@@ -30,4 +30,18 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Zombie")
+        {
+            bool dead = collision.gameObject.GetComponent<Zombie>().Damage(1);
+
+            if (dead)
+            {
+                transform.parent.gameObject.GetComponent<GunTurret>().RemoveTarget(collision.gameObject);
+            }
+            Destroy(this.gameObject);
+        }
+    }
 }

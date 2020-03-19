@@ -8,31 +8,48 @@ public class CameraMovement : MonoBehaviour
     private int height;
     private float speed = 20f;
     private int offset;
+    private float zoomAmount;
+    private float maxZoom;
 
-    [SerializeField]
-    private float leftBound = 26;
-    [SerializeField]
-    private float rightBound = 40;
-    [SerializeField]
-    private float topBound = 50;
-    [SerializeField]
-    private float bottomBound = 12;
+    private float mapX = 70f;
+    private float mapY = 65f;
+    private float minX;
+    private float maxX;
+    private float minY;
+    private float maxY;
+
+    private float vertExtent;
+    private float horzExtent;
 
     // Start is called before the first frame update
     void Start()
     {
         width  = Camera.main.pixelWidth;
         height = Camera.main.pixelHeight;
-
-        leftBound = 26f;
-        rightBound = 40f;
-        topBound = 50f;
-        bottomBound = 12f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Zoom camera
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && GetComponent<Camera>().orthographicSize > 4)
+        {
+            GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize - 2;
+            if (GetComponent<Camera>().orthographicSize <= 6)
+            {
+                GetComponent<Camera>().cullingMask |= 1 << LayerMask.NameToLayer("HealthBars");
+            }
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && GetComponent<Camera>().orthographicSize < 14)
+        {
+            GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize + 2;
+            if (GetComponent<Camera>().orthographicSize > 6)
+            {
+                GetComponent<Camera>().cullingMask &= ~(1 << LayerMask.NameToLayer("HealthBars"));
+            }
+        }
+
         // Move Camera up.
         if (Input.GetKey("w"))
         {
@@ -57,11 +74,21 @@ public class CameraMovement : MonoBehaviour
             transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
 
-        transform.position = new Vector3
-        (
-            Mathf.Clamp(transform.position.x, leftBound, rightBound), 
-            Mathf.Clamp(transform.position.y, bottomBound, topBound),
-            transform.position.z
-        );
+        //Used to clamp the camera to prevent it from escaping the bounds of the map
+        vertExtent = GetComponent<Camera>().orthographicSize;
+        horzExtent = vertExtent * Screen.width / Screen.height;
+
+        minX = horzExtent - 5f;
+        maxX = mapX - horzExtent;
+        minY = vertExtent - 5f;
+        maxY = mapY - vertExtent;
+    }
+
+    void LateUpdate()
+    {
+        Vector3 v3 = transform.position;
+        v3.x = Mathf.Clamp(v3.x, minX, maxX);
+        v3.y = Mathf.Clamp(v3.y, minY, maxY);
+        transform.position = v3;
     }
 }

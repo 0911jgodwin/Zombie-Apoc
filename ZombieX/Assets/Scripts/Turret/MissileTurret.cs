@@ -18,7 +18,7 @@ public class MissileTurret : Turret
 		
 					
         GameObject currentTarget = GetCurrentTarget();
-        GameObject missileClone = Instantiate(missile, transform.position, Quaternion.identity);
+        GameObject missileClone = Instantiate(missile, transform.position, Quaternion.identity, this.transform);
         Missile missileScript = missileClone.GetComponent<Missile>();
 
         missileScript.Seek(currentTarget.transform);

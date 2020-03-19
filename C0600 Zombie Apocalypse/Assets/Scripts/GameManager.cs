@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public float waveCount = 1;
     public bool waveCleared = false;
+    public float gameSpeed = 1f;
 
     public string uiSelection { get; set; } 
 
@@ -45,6 +46,16 @@ public class GameManager : MonoBehaviour
             waveCleared = false;
             SpawnWave(waveCount);
         }
+
+        if (Input.GetKeyUp("left"))
+        {
+            changeSpeed(false);
+        }
+
+        if (Input.GetKeyUp("right"))
+        {
+            changeSpeed(true);
+        }
     }
 
     void clickEvent()
@@ -67,6 +78,20 @@ public class GameManager : MonoBehaviour
                 GameObject.Find(hitGrid.collider.gameObject.name).transform.position,
                 GameObject.Find(hitGrid.collider.gameObject.name).transform.rotation,
                 uiSelection);
+        }
+    }
+
+    void changeSpeed(bool increase)
+    {
+        if (increase && gameSpeed <= 4f)
+        {
+            gameSpeed = gameSpeed * 2;
+            Time.timeScale = gameSpeed;
+        }
+        else if (!increase && Time.timeScale >= 0.5f)
+        {
+            gameSpeed = gameSpeed / 2;
+            Time.timeScale = gameSpeed;
         }
     }
 
