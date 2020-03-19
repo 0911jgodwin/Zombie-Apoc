@@ -6,7 +6,8 @@ using UnityEngine;
 public class Zombie : MonoBehaviour
 {
     Collider2D zombieCollider;
-    public int health;
+    public float health;
+    public bool dead;
     public Collider2D ZombieCollider { get { return zombieCollider; } }
 
     // Start is called before the first frame update
@@ -30,24 +31,7 @@ public class Zombie : MonoBehaviour
         transform.position += (Vector3)direction * Time.deltaTime;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Bullet")
-        {
-            health--;
-            Destroy(collision.gameObject);
-
-            if (health == 0)
-            {
-                GameObject parentHorde = transform.parent.gameObject;
-                Horde hordeScript = parentHorde.GetComponent<Horde>();
-                hordeScript.removeZombie(this);
-                Destroy(this.gameObject);
-            }
-        }
-    }
-
-    public void Damage(int incomingDamage)
+    public bool Damage(int incomingDamage)
     {
         health = health - incomingDamage;
 
@@ -57,6 +41,8 @@ public class Zombie : MonoBehaviour
             Horde hordeScript = parentHorde.GetComponent<Horde>();
             hordeScript.removeZombie(this);
             Destroy(this.gameObject);
+            this.dead = true;
         }
+        return dead;
     }
 }

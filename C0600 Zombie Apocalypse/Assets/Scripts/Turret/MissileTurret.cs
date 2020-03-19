@@ -16,7 +16,7 @@ public class MissileTurret : Turret
     public override void Fire(float targetAngle)
     {
         GameObject currentTarget = GetCurrentTarget();
-        GameObject missileClone = Instantiate(missile, transform.position, Quaternion.identity);
+        GameObject missileClone = Instantiate(missile, transform.position, Quaternion.identity, this.transform);
         Missile missileScript = missileClone.GetComponent<Missile>();
 
         missileScript.Seek(currentTarget.transform);

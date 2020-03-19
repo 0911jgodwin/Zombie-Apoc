@@ -56,7 +56,6 @@ public class Missile : MonoBehaviour
     void Explode()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
-        Debug.Log(colliders.Length);
         foreach (Collider2D collider in colliders)
         {
             if (collider.tag == "Zombie")
@@ -68,12 +67,15 @@ public class Missile : MonoBehaviour
 
     void Damage(Transform Zombie)
     {
-        Debug.Log("Hit!");
         Zombie zombie = Zombie.GetComponent<Zombie>();
 
         if (zombie != null)
         {
-            zombie.Damage(5);
+            bool dead = zombie.Damage(5);
+            if (dead)
+            {
+                transform.parent.gameObject.GetComponent<MissileTurret>().RemoveTarget(Zombie.gameObject);
+            }
         }
     }
 

@@ -56,6 +56,18 @@ public class Turret : MonoBehaviour
                 }
             }
         }
+        //else if (targetsInRange.Count == 0)
+        //{
+        //        transform.Rotate(anglesToRotate * Time.deltaTime);
+
+        //        if (timer >= rateOfFire)
+        //        {
+        //            Fire(transform.eulerAngles.z);
+        //        // crazy fire rate
+        //            rateOfFire = 10;
+        //            timer = 0;
+        //        }
+        //}
     }
 
     public virtual void Fire(float targetAngle)
@@ -63,7 +75,7 @@ public class Turret : MonoBehaviour
         //override with subclass fire method
     }
 
-    protected GameObject GetCurrentTarget()
+    public GameObject GetCurrentTarget()
     {
         return currentTarget;
     }
@@ -108,6 +120,8 @@ public class Turret : MonoBehaviour
         turretHealth--;
         if (turretHealth <= 0)
         {
+            Debug.Log(transform.position);
+            GameObject.Find("GameManager/TurretManager").GetComponent<TurretManager>().RemoveTurret(transform.position);
             Destroy(this.gameObject);
         }
     }
@@ -130,6 +144,7 @@ public class Turret : MonoBehaviour
                 TargetStrongest();
                 break;
         }
+        CheckTargets();
     }
 
 
@@ -139,12 +154,19 @@ public class Turret : MonoBehaviour
 
         for (int i = 0; i < targetsInRange.Count; i++)
         {
-            float dist = Vector3.Distance(transform.position, targetsInRange[i].transform.position);
-
-            if (!currentTarget || dist < closestDist)
+            if (targetsInRange[i] != null)
             {
-                currentTarget = targetsInRange[i];
-                closestDist = dist;
+                float dist = Vector3.Distance(transform.position, targetsInRange[i].transform.position);
+
+                if (!currentTarget || dist < closestDist)
+                {
+                    currentTarget = targetsInRange[i];
+                    closestDist = dist;
+                }
+            }
+            else
+            {
+                targetsInRange.RemoveAt(i);
             }
         }
     }
@@ -156,12 +178,19 @@ public class Turret : MonoBehaviour
 
         for (int i = 0; i < targetsInRange.Count; i++)
         {
-            float dist = Vector3.Distance(transform.position, targetsInRange[i].transform.position);
-
-            if (!currentTarget || dist > furthestDist)
+            if (targetsInRange[i] != null)
             {
-                currentTarget = targetsInRange[i];
-                furthestDist = dist;
+                float dist = Vector3.Distance(transform.position, targetsInRange[i].transform.position);
+
+                if (!currentTarget || dist > furthestDist)
+                {
+                    currentTarget = targetsInRange[i];
+                    furthestDist = dist;
+                }
+            }
+            else
+            {
+                targetsInRange.RemoveAt(i);
             }
         }
     }
@@ -169,16 +198,31 @@ public class Turret : MonoBehaviour
 
     void TargetWeakest()
     {
-        int lowestHealth = currentTarget.GetComponent<Zombie>().health;
-
+        float lowestHealth;
+        if (targetsInRange.Contains(currentTarget))
+        {
+            lowestHealth = currentTarget.GetComponent<Zombie>().health;
+        }
+        else
+        {
+            currentTarget = targetsInRange[0];
+            lowestHealth = targetsInRange[0].GetComponent<Zombie>().health;
+        }
         for (int i = 0; i < targetsInRange.Count; i++)
         {
-            int maxHp = targetsInRange[i].GetComponent<Zombie>().health;
-
-            if (!currentTarget || maxHp < lowestHealth)
+            if (targetsInRange[i] != null)
             {
-                lowestHealth = maxHp;
-                currentTarget = targetsInRange[i];
+                float maxHp = targetsInRange[i].GetComponent<Zombie>().health;
+
+                if (!currentTarget || maxHp < lowestHealth)
+                {
+                    lowestHealth = maxHp;
+                    currentTarget = targetsInRange[i];
+                }
+            }
+            else
+            {
+                targetsInRange.RemoveAt(i);
             }
         }
     }
@@ -186,17 +230,76 @@ public class Turret : MonoBehaviour
 
     void TargetStrongest()
     {
-        int highestHealth = currentTarget.GetComponent<Zombie>().health;
+        float highestHealth;
+
+        if (targetsInRange.Contains(currentTarget))
+        {
+            highestHealth = currentTarget.GetComponent<Zombie>().health;
+        }
+        else
+        {
+            currentTarget = targetsInRange[0];
+            highestHealth = targetsInRange[0].GetComponent<Zombie>().health;
+        }
 
         for (int i = 0; i < targetsInRange.Count; i++)
         {
-            int maxHp = targetsInRange[i].GetComponent<Zombie>().health;
-
-            if (!currentTarget || maxHp > highestHealth)
+            if (targetsInRange[i] != null)
             {
-                highestHealth = maxHp;
-                currentTarget = targetsInRange[i];
+                float maxHp = targetsInRange[i].GetComponent<Zombie>().health;
+
+                if (!currentTarget || maxHp > highestHealth)
+                {
+                    highestHealth = maxHp;
+                    currentTarget = targetsInRange[i];
+                }
+            }
+            else
+            {
+                targetsInRange.RemoveAt(i);
             }
         }
+    }
+
+    void CheckTargets()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRadius);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.tag == "Turret")
+            {
+                GameObject turretObject = collider.gameObject;
+                if (turretObject != this.transform.Find("Turret Body").gameObject)
+                {
+                    Turret otherTurret = turretObject.transform.parent.gameObject.GetComponent<Turret>();
+                    GameObject otherTarget = otherTurret.GetCurrentTarget();
+                    if (otherTarget == currentTarget)
+                    {
+                        Retarget();
+                    }
+                }
+            }
+        }
+    }
+
+    void Retarget()
+    {
+        targetsInRange.Remove(currentTarget);
+        GameObject temp = currentTarget;
+        currentTarget = null;
+        if (targetsInRange.Count > 1)
+        {
+            TargetPriority();
+        }
+        else
+        {
+            currentTarget = temp;
+        }
+        targetsInRange.Add(temp);
+    }
+
+    public void RemoveTarget(GameObject zombie)
+    {
+        targetsInRange.Remove(zombie);
     }
 }
